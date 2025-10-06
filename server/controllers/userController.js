@@ -75,6 +75,7 @@ export const updateProfile=async(req,res)=>{
     try{
         const {profilePic,bio,fullName}=req.body;
         const userId=req.user._id;
+            let updatedUser;
         if(!profilePic)
         {
            updatedUser = await User.findByIdAndUpdate(userId,{bio,fullName},{new:true});
@@ -86,7 +87,7 @@ export const updateProfile=async(req,res)=>{
                 updatedUser = await User.findByIdAndUpdate(userId,{profilePic:upload.secure_url,bio,fullName},{new:true})
 
             } 
-            res.json({success:true,use:updatedUser})
+            res.json({success:true,user:updatedUser})
     }
     catch(error)
     {
